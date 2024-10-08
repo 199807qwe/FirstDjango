@@ -11,13 +11,21 @@ def home(request):
     """
     return HttpResponse(text)
 
-def about(request):
-    text  =  """
-    <h2>Имя: Иван</h2>
-    <h2>Отчество: Петрович</h2>
-    <h2>Фамилия: Иванов</h2>
-    <h2>телефон: 8-923-600-01-02</h2>
-    <h2>email: vasya@mail.ru</h2>
-    <strong>Author<strong>:<i>Ivanov</i>
-    """
-    return HttpResponse(text)
+
+from flask import Flask, jsonify
+
+app = Flask(__name__)
+
+@app.route('/about')
+def about():
+    user_info = {
+        "Имя": "Иван",
+        "Отчество": "Петрович",
+        "Фамилия": "Иванов",
+        "телефон": "8-923-600-01-02",
+        "email": "vasya@mail.ru"
+    }
+    return jsonify(user_info)  # или return "<br>".join([f"{key}: {value}" for key, value in user_info.items()])
+
+if __name__ == '__main__':
+    app.run(debug=True)
