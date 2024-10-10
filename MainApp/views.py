@@ -46,6 +46,14 @@ def get_item(request , item_id:int):
             result = f"""
             <h2>  Name: {item['name']} </h2>
             <p> Cost:{item['quiantity']}</p>
+            <p> <a href ='/items'> back to items list</a>
             """
             return HttpResponse(f'{result = }')
     return HttpResponseNotFound(f'Item with id={item_id} not found')
+
+def get_items(request):
+    result =  "<h1> List product</h1><ol>"
+    for item in items:
+        result += f"""<li><a href='/item/{item["id"]}'> {item["name"]} </a> </li>"""
+    result += "</ol>"
+    return HttpResponse(result)
