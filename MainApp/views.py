@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseNotFound
-
+from MainApp.models import Item
 # Create your views here.
 # Create your views here.
 
@@ -34,19 +34,16 @@ def about(request):
 
 
 
-
-
-
 def get_item(request, item_id: int):
     """ По указанному id возвращает элемент из списка"""
     try:
         item=Item.objects.get(id=item_id)
     except Item.DoesNotExcist:
         return HttpResponseNotFound(f'Item with id={item_id} not found')
-    for item in items:
-        if item['id'] == item_id:
-            context = {"item": item}
-            return render(request, "item_page.html", context)
+    # for Item in items:
+    #     if item['id'] == item_id:
+    context = {"item": item}
+    return render(request, "item_page.html", context)
     
 
 def get_items(request):
