@@ -19,9 +19,9 @@ from django.urls import path
 from MainApp import views
 
 urlpatterns  = [
-    path ("",views.home),
-    path ("about",views.about),
-    path ("item/<int:item_id>",views.get_item),
-    path ("items",views.get_items),
+    path ("",views.home , name="Home"),
+    path ("about",views.about, name="About"),
+    path ("item/<int:item_id>",views.get_item, name="Item"),
+    path ("items",views.get_items, name="Items"),
 
 ]
